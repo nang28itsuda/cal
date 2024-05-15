@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공학용 계산기</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+        .calculator {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            width: 100%;
+        }
+        .display {
+            background: #222;
+            color: #fff;
+            font-size: 2em;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: right;
+            word-wrap: break-word;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .button.operator {
+            background: #ff9800;
+        }
+        .button.clear {
+            background: #f44336;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+        .button.operator:hover {
+            background: #e68a00;
+        }
+        .button.clear:hover {
+            background: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <div class="buttons">
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="appendCharacter('(')">(</button>
+            <button class="button" onclick="appendCharacter(')')">)</button>
+            <button class="button operator" onclick="appendCharacter('/')">/</button>
+            <button class="button" onclick="appendCharacter('7')">7</button>
+            <button class="button" onclick="appendCharacter('8')">8</button>
+            <button class="button" onclick="appendCharacter('9')">9</button>
+            <button class="button operator" onclick="appendCharacter('*')">*</button>
+            <button class="button" onclick="appendCharacter('4')">4</button>
+            <button class="button" onclick="appendCharacter('5')">5</button>
+            <button class="button" onclick="appendCharacter('6')">6</button>
+            <button class="button operator" onclick="appendCharacter('-')">-</button>
+            <button class="button" onclick="appendCharacter('1')">1</button>
+            <button class="button" onclick="appendCharacter('2')">2</button>
+            <button class="button" onclick="appendCharacter('3')">3</button>
+            <button class="button operator" onclick="appendCharacter('+')">+</button>
+            <button class="button" onclick="appendCharacter('0')">0</button>
+            <button class="button" onclick="appendCharacter('.')">.</button>
+            <button class="button" onclick="appendCharacter('Math.PI')">π</button>
+            <button class="button operator" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <script>
+        function appendCharacter(char) {
+            const display = document.getElementById('display');
+            if (display.innerText === '0') {
+                display.innerText = char;
+            } else {
+                display.innerText += char;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.innerText = eval(display.innerText);
+            } catch (error) {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
